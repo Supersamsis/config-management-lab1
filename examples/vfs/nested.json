@@ -1,0 +1,33 @@
+{
+  "name": "/",
+  "is_dir": true,
+  "content": "",
+  "children": {
+    "home": {
+      "name": "home",
+      "is_dir": true,
+      "content": "",
+      "children": {
+        "user": {
+          "name": "user",
+          "is_dir": true,
+          "content": "",
+          "children": {
+            "docs": {
+              "name": "docs",
+              "is_dir": true,
+              "content": "",
+              "children": {
+                "readme.txt": {
+                  "name": "readme.txt",
+                  "is_dir": false,
+                  "content": "Hello!"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

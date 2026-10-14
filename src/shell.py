@@ -70,7 +70,7 @@ class Shell:
         print("Добро пожаловать в эмулятор оболочки!")
         while self.running:
             try:
-                prompt = f"{self.vfs.name}$ "
+                prompt = f"{self.vfs.cwd.name}$ "
                 print(prompt, end="", flush=True)
                 line = input()
                 output = self.execute(line)
