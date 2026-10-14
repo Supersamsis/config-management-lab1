@@ -81,6 +81,7 @@ class Shell:
             except (EOFError, KeyboardInterrupt):
                 print("\nВыход.")
                 break
+
     def run_script(self, path: str) -> None:
         """Выполняет стартовый скрипт.
 
