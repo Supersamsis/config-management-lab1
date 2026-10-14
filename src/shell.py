@@ -81,3 +81,27 @@ class Shell:
             except (EOFError, KeyboardInterrupt):
                 print("\nВыход.")
                 break
+    def run_script(self, path: str) -> None:
+        """Выполняет стартовый скрипт.
+
+        Поддерживает комментарии, начинающиеся с '#'.
+        Показывает ввод и вывод, имитируя диалог с пользователем.
+
+        Args:
+            path: путь к файлу скрипта.
+        """
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                for raw_line in f:
+                    stripped = raw_line.strip()
+                    if not stripped or stripped.startswith("#"):
+                        continue
+                    print(f"$ {stripped}")
+                    try:
+                        output = self.execute(stripped)
+                        if output:
+                            print(output)
+                    except CommandError as e:
+                        print(f"Ошибка: {e}")
+        except FileNotFoundError:
+            print(f"Ошибка: скрипт не найден: {path}")
