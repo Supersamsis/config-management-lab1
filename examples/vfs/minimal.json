@@ -1,0 +1,25 @@
+{
+  "name": "/",
+  "is_dir": true,
+  "content": "",
+  "children": {
+    "home": {
+      "name": "home",
+      "is_dir": true,
+      "content": "",
+      "children": {}
+    },
+    "etc": {
+      "name": "etc",
+      "is_dir": true,
+      "content": "",
+      "children": {
+        "hostname": {
+          "name": "hostname",
+          "is_dir": false,
+          "content": "myhost"
+        }
+      }
+    }
+  }
+}
