@@ -62,9 +62,61 @@ def cmd_date(_: VFS, __: List[str]) -> str:
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
+def cmd_mkdir(vfs: VFS, args: List[str]) -> str:
+    """Создаёт директорию в VFS.
+
+    Args:
+        vfs: виртуальная файловая система.
+        args: список путей для создания.
+
+    Returns:
+        Пустая строка.
+
+    Raises:
+        CommandError: если путь не указан или создать не удалось.
+    """
+    if not args:
+        raise CommandError("mkdir: missing operand")
+    for path in args:
+        if not vfs.create_dir(path):
+            raise CommandError(
+                f"mkdir: cannot create directory '{path}'"
+            )
+    return ""
+
+
+def cmd_vfs_load(vfs: VFS, args: List[str]) -> str:
+    """Загружает новую VFS из файла.
+
+    Args:
+        vfs: текущая VFS (будет заменена).
+        args: путь к JSON-файлу.
+
+    Returns:
+        Сообщение об успешной загрузке.
+
+    Raises:
+        CommandError: если путь не указан или файл недоступен.
+    """
+    if not args:
+        raise CommandError("vfs-load: missing file path")
+    path = args[0]
+    try:
+        new_vfs = VFS.from_json(path)
+    except FileNotFoundError:
+        raise CommandError(f"vfs-load: file not found: {path}")
+    except ValueError as error:
+        raise CommandError(f"vfs-load: invalid file: {error}")
+    vfs.root = new_vfs.root
+    vfs.cwd = new_vfs.cwd
+    return f"VFS loaded from {path}"
+
+
 COMMANDS = {
     "ls": cmd_ls,
     "cd": cmd_cd,
     "whoami": cmd_whoami,
     "date": cmd_date,
+    "mkdir": cmd_mkdir,
+    "vfs-load": cmd_vfs_load,
 }
