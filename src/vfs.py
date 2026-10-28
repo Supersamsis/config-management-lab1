@@ -108,7 +108,8 @@ class VFS:
             return self.root
         return self._find_parent(self.root, node) or self.root
 
-    def _find_parent(self, current: VFSNode, target: VFSNode) -> Optional[VFSNode]:
+    def _find_parent(self, current: VFSNode, target: VFSNode)\
+          -> Optional[VFSNode]:
         """Рекурсивно ищет родителя target в дереве."""
         for child in current.children.values():
             if child is target:
