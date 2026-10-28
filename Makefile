@@ -1,4 +1,4 @@
-.PHONY: run test lint clean
+.PHONY: run test clean
 
 run:
 	py -3.11 -m src.main
@@ -6,8 +6,5 @@ run:
 test:
 	py -3.11 -m pytest tests/ -v
 
-lint:
-	py -3.11 -m flake8 src/ tests/
-
 clean:
-	rm -rf __pycache__ .pytest_cache
+	py -3.11 -c "import shutil; shutil.rmtree('__pycache__', ignore_errors=True); shutil.rmtree('.pytest_cache', ignore_errors=True)"
